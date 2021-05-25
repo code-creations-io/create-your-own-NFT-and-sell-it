@@ -44,12 +44,12 @@ Now we want to add some Rinkeby LINK to our wallet, we do this by:
 
 Now we need to install two things `ganache-cli` and `eth-brownie`. You can do this with these two commands:
 
-    $ npm install -g ganache-cli
-    $ pip install eth-brownie
+    npm install -g ganache-cli
+    pip install eth-brownie
 
 For the code, let's make use of some excellent boilerplate code provided an NFT Brownie Mix repo. Use this command to clone all of the files into your current directory:
 
-    $ git clone https://github.com/PatrickAlphaC/nft-mix .
+    git clone https://github.com/PatrickAlphaC/nft-mix .
 
 Finally we need to create some environment variables, go to the `.env` file in your directory and update the following variables
 
@@ -74,7 +74,7 @@ As for the other environment variables in this file, keep them commented for now
 
 First we are going to deplo a simple NFT contract and then we are going to create our first collectible! To do this, source the environment variables by running `source .env` within the root of your project. Now let's creat a simple NFT contract on thre Rinkeby blockchain by running:
 
-    $ brownie run scripts/simple_collectible/deploy_simple.py --network rinkeby
+    brownie run scripts/simple_collectible/deploy_simple.py --network rinkeby
 
 ```
 brownie run scripts/simple_collectible/create_collectible.py --network rinkeby
