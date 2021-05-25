@@ -42,7 +42,16 @@ Now we want to add some Rinkeby LINK to our wallet, we do this by:
 
 ## Setup environment
 
-First we need to create some environment variables, create a `.env` file in your desired directory and add the following variables
+Now we need to install two things `ganache-cli` and `eth-brownie`. You can do this with these two commands:
+
+    $ npm install -g ganache-cli
+    $ pip install eth-brownie
+
+For the code, let's make use of some excellent boilerplate code provided an NFT Brownie Mix repo. Use this command to clone all of the files into your current directory:
+
+    $ git clone https://github.com/PatrickAlphaC/nft-mix .
+
+Finally we need to create some environment variables, go to the `.env` file in your directory and update the following variables
 
 ```
 export PRIVATE_KEY=<enter private key>
@@ -57,34 +66,18 @@ export WEB3_INFURA_PROJECT_ID=<enter Infura Project ID>
 - Once created, you'll be presented with it's `PROJECT_ID`. Use this to create the `WEB3_INFURA_PROJECT_ID` within the `.env` file
 - Make sure to also change the Endpoint of the Ethereum project to `Rinkeby`
 
-Now we need to install two things `ganache-cli` and `eth-brownie`. You can do this with these two commands:
-
-    $ npm install -g ganache-cli
-    $ pip install eth-brownie
+As for the other environment variables in this file, keep them commented for now.
 
 ---
 
 ## Create our first contract and deploy!
 
-First we are going to deploya simple NFT contract and then we are going to create our first collectible! To do this, we need to create some scripts. In the root of your project, create a folder called `scripts`. Let's start with by creating a `deploy_simple.py` script within this folder. Within this file, enter this code:
+First we are going to deplo a simple NFT contract and then we are going to create our first collectible! To do this, source the environment variables by running `source .env` within the root of your project. Now let's creat a simple NFT contract on thre Rinkeby blockchain by running:
+
+    $ brownie run scripts/simple_collectible/deploy_simple.py --network rinkeby
 
 ```
-#!/usr/bin/python3
-import os
-from brownie import SimpleCollectible, accounts, network, config
-from dotenv import load_dotenv
-
-load_dotenv()
-
-
-def main():
-    dev = accounts.add(config["wallets"]["from_key"])
-    print(network.show_active())
-    publish_source = True if os.getenv("ETHERSCAN_TOKEN") else False
-    SimpleCollectible.deploy({"from": dev}, publish_source=publish_source)
-```
-
-```
-brownie run scripts/simple_collectible/deploy_simple.py --network rinkeby
 brownie run scripts/simple_collectible/create_collectible.py --network rinkeby
 ```
+
+Now we're ready to run our code to deploy our NFT contract to the Rinkeby and create our first collectible! To deploy our collectible, we will be deploying it on a platform called `OpenSea`. Run these lines fo code to do this (from the root of your project):
